@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<report
+	    id="reparto_utilidades_data"
+	    model="hr.payslip"
+	    string="Reparto utilidades"
+	    report_type="xlsx"
+	    name="nomina_cfdi_extras_ee.reparto_utilidades_data"
+	    file="reparto_utilidades_xls"
+	    menu="False"
+      />
+
+</odoo>
