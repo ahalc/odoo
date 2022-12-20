@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_move_line_tree_grouped_general_int_balance" model="ir.ui.view">
+        <field name="name">account.move.line.tree.grouped.misc</field>
+        <field name="model">account.move.line</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="account.view_move_line_tree_grouped"/>
+        <field name="arch" type="xml">
+            <field name="account_id" position="attributes">
+                <attribute name="optional">hide</attribute>
+                <attribute name="readonly">1</attribute>
+            </field>
+            <field name="balance" position="attributes"><attribute name="optional">show</attribute></field>
+            <field name="balance" position="after">
+                <field name="cumulated_balance" optional="show"/>
+            </field>
+            <field name="debit" position="before">
+                <field name="initial_balance" optional="show"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="action_account_moves_ledger_general_int_balance" model="ir.actions.act_window">
+        <field name="context">{'journal_type':'general', 'search_default_group_by_account': 1, 'search_default_posted':1}</field>
+        <field name="name">General Ledger With Initial</field>
+        <field name="res_model">account.move.line</field>
+        <field name="domain">[('display_type', 'not in', ('line_section', 'line_note'))]</field>
+        <field name="view_id" ref="view_move_line_tree_grouped_general_int_balance"/>
+        <field name="search_view_id" ref="account.view_account_move_line_filter_with_root_selection"/>
+        <field name="view_mode">tree,pivot,graph</field>
+    </record>
+
+    <menuitem id="menu_action_account_moves_ledger_general_int_balance" action="action_account_moves_ledger_general_int_balance" groups="account.group_account_readonly" sequence="3" parent="account.menu_finance_entries_accounting_ledgers"/>
+</odoo>
